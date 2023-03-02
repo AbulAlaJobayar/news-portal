@@ -31,12 +31,30 @@ const categoryNews=(id, category_name) =>{
 const categoryCard=(data , category_name)=>{
     console.log(data,category_name)
     document.getElementById('allNews').innerText=`${data.length}`
-    document.getElementById('catagoryName').innerText=`${category_name}`
- data.forEach( singledata=> {
-    console.log(singledata.author)
-const {name,published_date,img}= singledata.author
+    document.getElementById('catagoryName').innerText=`${category_name}`;
 
+const mainCard=document.getElementById('cardSection');
+mainCard.innerHTML='';
+data.forEach( singledata=> {
+console.log(singledata)
 
+const div= document.createElement('div');
+div.classList.add('card','mb-3');
+div.innerHTML=`
+<div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${singledata.image_url}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">${singledata.author.name? singledata.author.name:'no title'}</h5>
+                        <p class="card-text">${singledata.details.slice(0,200)}...</p>
+                        <p class="card-text"><small class="text-muted">${singledata.author.published_date}</small></p>
+                    </div>
+                </div>
+            </div>
+`
+mainCard.appendChild(div)
  }); 
 }
 
